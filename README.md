@@ -1,6 +1,6 @@
 # notes
 A basic notes app 
-Built using .net 5
+Built using .net 5; can use https://localhost:5001/swagger/index.html to interact with the app or Postman via https://localhost:5001/api/Notes .
 
 From CLI to create the new .net app
 dotnet new webapi -n notes
