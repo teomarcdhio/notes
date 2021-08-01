@@ -7,8 +7,11 @@ dotnet new webapi -n notes
 
 Add the relevant packages
 dotnet add package Microsoft.EntityFrameworkCore --version 5.0.0
+
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
+
 dotnet add package Microsoft.EntityFrameworkCore.Design
+
 dotnet add package MySql.EntityFrameworkCore --version 5.0.0
 
 And the following for Migrations and controller generators
@@ -19,7 +22,9 @@ Create a Data folder where to store the Context files that will define the DB co
 Create a model for the relevant objects
 
 Create a controller for the relevant objects ( can scaffold with the aspnet codegenrator )
+
 dotnet tool install -g dotnet-aspnet-codegenerator
+
 dotnet aspnet-codegenerator controller -name NotesController -api -m Note -dc NotesContext -outDir Controllers
 
 Create migrations
