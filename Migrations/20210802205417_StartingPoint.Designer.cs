@@ -8,8 +8,8 @@ using Notes.Data;
 namespace notes.Migrations
 {
     [DbContext(typeof(NotesContext))]
-    [Migration("20210801181429_NotesController")]
-    partial class NotesController
+    [Migration("20210802205417_StartingPoint")]
+    partial class StartingPoint
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -18,19 +18,39 @@ namespace notes.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.0");
 
+            modelBuilder.Entity("Notes.Models.Category", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("Notes.Models.Note", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("IsArchived")
+                    b.Property<bool>("Active")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Url")
                         .HasColumnType("text");
 
                     b.HasKey("Id");

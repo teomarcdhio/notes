@@ -10,6 +10,10 @@ namespace Notes.Models
         public string Name { get; set; }
         [Required]
         public string Description { get; set; }
-        public bool IsArchived { get; set; }
+        public string Url { get; set; }
+        public bool Active { get; set; }
+        public string CreatedOn { get; set; }
+
     }
+
 }

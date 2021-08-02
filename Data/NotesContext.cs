@@ -11,5 +11,6 @@ namespace Notes.Data
 
             }
             public DbSet<Note> Notes {get; set;}
+            public DbSet<Category> Categories {get; set;}
     }
 }

@@ -12,64 +12,49 @@ namespace notes.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class NotesController : ControllerBase
+    public class CategoriesController : ControllerBase
     {
         private readonly NotesContext _context;
 
-        public NotesController(NotesContext context)
+        public CategoriesController(NotesContext context)
         {
             _context = context;
         }
 
-        // GET: api/Notes
+        // GET: api/Categories
         [HttpGet]
         [ResponseCache(Duration = 60)]
-        public async Task<ActionResult<IEnumerable<Note>>> GetNotes()
+        public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
         {
-            return await _context.Notes.ToListAsync();
+            return await _context.Categories.ToListAsync();
         }
 
-       //Search by type /api/Notes/SearchNote?type=abc
-       [HttpGet]
-       [Route("[action]")]
-       public async Task<ActionResult<IEnumerable<Note>>> SearchNote(string notename)
-       {
-           var Notes = await _context.Notes.Where(c => c.Name.Contains(notename)).ToListAsync();
-           if (Notes == null)
-            {
-                return NotFound();
-            }
-
-            return Notes; 
-            
-       }
-
-        // GET: api/Notes/5
+        // GET: api/Categories/5
         [HttpGet("{id}")]
         [ResponseCache(Duration = 60)]
-        public async Task<ActionResult<Note>> GetNote(long id)
+        public async Task<ActionResult<Category>> GetCategory(long id)
         {
-            var note = await _context.Notes.FindAsync(id);
+            var category = await _context.Categories.FindAsync(id);
 
-            if (note == null)
+            if (category == null)
             {
                 return NotFound();
             }
 
-            return note;
+            return category;
         }
 
-        // PUT: api/Notes/5
+        // PUT: api/Categories/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutNote(long id, Note note)
+        public async Task<IActionResult> PutCategory(long id, Category category)
         {
-            if (id != note.Id)
+            if (id != category.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(note).State = EntityState.Modified;
+            _context.Entry(category).State = EntityState.Modified;
 
             try
             {
@@ -77,7 +62,7 @@ namespace notes.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!NoteExists(id))
+                if (!CategoryExists(id))
                 {
                     return NotFound();
                 }
@@ -90,36 +75,36 @@ namespace notes.Controllers
             return NoContent();
         }
 
-        // POST: api/Notes
+        // POST: api/Categories
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Note>> PostNote(Note note)
+        public async Task<ActionResult<Category>> PostCategory(Category category)
         {
-            _context.Notes.Add(note);
+            _context.Categories.Add(category);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetNote", new { id = note.Id }, note);
+            return CreatedAtAction("GetCategory", new { id = category.Id }, category);
         }
 
-        // DELETE: api/Notes/5
+        // DELETE: api/Categories/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteNote(long id)
+        public async Task<IActionResult> DeleteCategory(long id)
         {
-            var note = await _context.Notes.FindAsync(id);
-            if (note == null)
+            var category = await _context.Categories.FindAsync(id);
+            if (category == null)
             {
                 return NotFound();
             }
 
-            _context.Notes.Remove(note);
+            _context.Categories.Remove(category);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool NoteExists(long id)
+        private bool CategoryExists(long id)
         {
-            return _context.Notes.Any(e => e.Id == id);
+            return _context.Categories.Any(e => e.Id == id);
         }
     }
 }
